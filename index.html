@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Writing Style Analysis | ENG101 | Salem Community College</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=DM+Sans:wght@400;500;600;700&display=swap');
+
+  :root {
+    --scc-green: #2E6B3E;
+    --scc-green-dark: #1D4A2A;
+    --scc-green-light: #E8F2EB;
+    --scc-green-mid: #D0E5D5;
+    --white: #FFFFFF;
+    --off-white: #F8FAF8;
+    --text-primary: #1A2E1F;
+    --text-secondary: #3D5C45;
+    --text-muted: #536B59;
+    --border: #C8D9CD;
+    --shadow: rgba(46, 107, 62, 0.08);
+    --prompt-bg: #F5F0EB;
+    --prompt-border: #B8A998;
+    --focus-ring: #2E6B3E;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  .skip-link {
+    position: absolute;
+    top: -100%;
+    left: 1rem;
+    background: var(--scc-green);
+    color: var(--white);
+    padding: 0.75rem 1.25rem;
+    border-radius: 0 0 8px 8px;
+    font-weight: 600;
+    z-index: 1000;
+    text-decoration: none;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .skip-link:focus {
+    top: 0;
+    outline: 3px solid var(--scc-green-dark);
+    outline-offset: 2px;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--off-white);
+    color: var(--text-primary);
+    line-height: 1.65;
+    min-height: 100vh;
+  }
+
+  *:focus-visible {
+    outline: 3px solid var(--focus-ring);
+    outline-offset: 2px;
+  }
+  textarea:focus-visible {
+    outline: 3px solid var(--focus-ring);
+    outline-offset: 0;
+    box-shadow: 0 0 0 5px rgba(46, 107, 62, 0.12);
+  }
+
+  header {
+    background: var(--scc-green);
+    color: var(--white);
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 12px var(--shadow);
+  }
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .oak-icon { width: 40px; height: 40px; }
+  .header-text h1 {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .header-text p {
+    font-size: 0.8rem;
+    opacity: 0.85;
+    font-weight: 400;
+  }
+
+  .progress-container {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .progress-bar-track {
+    height: 8px;
+    background: var(--scc-green-mid);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: var(--scc-green);
+    border-radius: 4px;
+    transition: width 0.4s ease;
+  }
+  .progress-text {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    display: flex;
+    justify-content: space-between;
+  }
+
+  main {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 6rem;
+  }
+
+  .step { display: none; }
+  .step.active { display: block; animation: fadeIn 0.3s ease; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .step-label {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--scc-green);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.5rem;
+  }
+
+  .step h2 {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 1.25rem;
+    letter-spacing: -0.02em;
+    line-height: 1.3;
+  }
+
+  .step p { margin-bottom: 1rem; font-size: 1rem; color: var(--text-secondary); }
+  .step ul, .step ol { margin: 0.75rem 0 1rem 1.25rem; color: var(--text-secondary); }
+  .step li { margin-bottom: 0.4rem; font-size: 1rem; }
+
+  .callout {
+    background: var(--scc-green-light);
+    border-left: 4px solid var(--scc-green);
+    padding: 1rem 1.25rem;
+    border-radius: 0 8px 8px 0;
+    margin: 1.25rem 0;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+  }
+  .callout strong { color: var(--scc-green-dark); }
+  .callout a {
+    color: var(--scc-green-dark);
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 2px;
+  }
+  .callout a:hover { color: var(--text-primary); }
+
+  .prompt-block {
+    background: var(--prompt-bg);
+    border: 1px solid var(--prompt-border);
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    margin: 1.25rem 0;
+    position: relative;
+  }
+  .prompt-block-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #6B5B4A;
+    margin-bottom: 0.75rem;
+  }
+  .prompt-text {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.92rem;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    line-height: 1.6;
+    color: var(--text-primary);
+  }
+  .copy-btn {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    background: var(--white);
+    border: 1px solid var(--prompt-border);
+    border-radius: 6px;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    font-family: 'DM Sans', sans-serif;
+    color: #6B5B4A;
+    cursor: pointer;
+    transition: all 0.2s;
+    min-height: 36px;
+  }
+  .copy-btn:hover { background: #6B5B4A; color: var(--white); }
+  .copy-btn.copied { background: var(--scc-green); color: var(--white); border-color: var(--scc-green); }
+
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+  }
+
+  .response-area { margin: 1.25rem 0; }
+  .response-area label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+  }
+  .response-area .helper-text {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 0.4rem;
+  }
+  .response-area textarea {
+    width: 100%;
+    min-height: 140px;
+    padding: 1rem;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-primary);
+    background: var(--white);
+    resize: vertical;
+    transition: border-color 0.2s;
+  }
+  .response-area textarea::placeholder { color: var(--text-muted); }
+
+  nav.step-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+  .btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+    min-height: 44px;
+    min-width: 44px;
+  }
+  .btn-primary { background: var(--scc-green); color: var(--white); }
+  .btn-primary:hover, .btn-primary:focus-visible {
+    background: var(--scc-green-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px var(--shadow);
+  }
+  .btn-secondary {
+    background: transparent;
+    color: var(--text-secondary);
+    border: 2px solid var(--border);
+  }
+  .btn-secondary:hover, .btn-secondary:focus-visible {
+    background: var(--scc-green-light);
+    color: var(--scc-green-dark);
+    border-color: var(--scc-green);
+  }
+  .btn-export { background: var(--scc-green); color: var(--white); padding: 0.85rem 2rem; font-size: 1rem; }
+  .btn-export:hover, .btn-export:focus-visible { background: var(--scc-green-dark); }
+
+  .example-questions { display: flex; flex-direction: column; gap: 0.5rem; margin: 1rem 0; }
+  .example-q {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-style: italic;
+  }
+
+  .export-section { text-align: center; padding: 2rem 0; }
+  .export-section p { color: var(--text-secondary); margin-bottom: 1.5rem; }
+  .checkmark {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 56px; height: 56px; background: var(--scc-green-light); border-radius: 50%; margin-bottom: 1rem;
+  }
+  .checkmark svg { width: 28px; height: 28px; stroke: var(--scc-green); stroke-width: 2.5; fill: none; }
+
+  @media (max-width: 600px) {
+    header { padding: 1rem; }
+    .header-text h1 { font-size: 1.1rem; }
+    main { padding: 1.5rem 1rem 5rem; }
+    .step h2 { font-size: 1.4rem; }
+    .prompt-block { padding: 1rem; }
+    nav.step-nav { flex-direction: column; gap: 0.75rem; }
+    .btn { width: 100%; text-align: center; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .step.active { animation: none; }
+    .progress-bar-fill { transition: none; }
+    .btn { transition: none; }
+  }
+
+  @media (forced-colors: active) {
+    .progress-bar-fill { background: Highlight; }
+    .callout { border-left-color: Highlight; }
+    .btn-primary { background: Highlight; color: HighlightText; }
+  }
+
+  @media print {
+    .progress-container, nav.step-nav, .copy-btn, .btn, .skip-link { display: none !important; }
+    .step { display: block !important; page-break-inside: avoid; margin-bottom: 2rem; }
+    header { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    .prompt-block, .callout { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    body { background: white; }
+  }
+</style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+<div id="liveRegion" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+
+<header>
+  <div class="header-left">
+    <svg class="oak-icon" viewBox="0 0 40 40" fill="none" aria-hidden="true" focusable="false">
+      <circle cx="20" cy="16" r="12" fill="rgba(255,255,255,0.2)"/>
+      <path d="M20 8c-3 0-6 1.5-7.5 4s-1.5 5.5 0 8c1.5 2.5 4.5 4 7.5 4s6-1.5 7.5-4 1.5-5.5 0-8S23 8 20 8z" fill="rgba(255,255,255,0.35)"/>
+      <rect x="19" y="24" width="2" height="10" rx="1" fill="rgba(255,255,255,0.5)"/>
+      <path d="M15 34 Q20 31 25 34" stroke="rgba(255,255,255,0.3)" stroke-width="1.5" fill="none"/>
+    </svg>
+    <div class="header-text">
+      <h1>My Writing Style Analysis</h1>
+      <p>ENG101 &middot; Salem Community College</p>
+    </div>
+  </div>
+</header>
+
+<div class="progress-container">
+  <div class="progress-bar-track" role="progressbar" aria-valuenow="14" aria-valuemin="0" aria-valuemax="100" aria-label="Activity progress">
+    <div class="progress-bar-fill" id="progressFill" style="width: 14.3%"></div>
+  </div>
+  <div class="progress-text">
+    <span id="progressLabel">Step 1 of 7</span>
+    <span id="progressPercent">14%</span>
+  </div>
+</div>
+
+<main id="main-content">
+
+  <!-- STEP 1 -->
+  <section class="step active" id="step1" role="region" aria-label="Step 1: Welcome and Setup" tabindex="-1">
+    <span class="step-label" aria-hidden="true">Step 1 of 7</span>
+    <h2>Welcome to Your Writing Style Analysis</h2>
+    <p>This week we've been exploring why the writing we create as humans matters — and how AI can be a tool that supports our writing instead of replacing it.</p>
+    <p>In this activity, you're going to find out something surprising: <strong>you already have a writing style.</strong> You have patterns, habits, and a voice that are uniquely yours, even if you've never thought about them before.</p>
+    <p>You'll use Claude — an AI tool — to analyze samples of your own writing. Then you'll reflect on what you discover.</p>
+
+    <div class="callout" role="note">
+      <strong>Setting up Claude:</strong> If you don't already have a Claude account, go to <a href="https://claude.ai" target="_blank" rel="noopener noreferrer">claude.ai<span class="sr-only"> (opens in new tab)</span></a> and sign up with your Google account or email. The free plan works perfectly. Keep Claude open in another tab.
+    </div>
+
+    <p>Before we start, gather some samples of <strong>your</strong> writing. You want at least 2–3 pieces. These need to be things you actually wrote — not group projects, not templates, not AI-generated text.</p>
+    <ul>
+      <li>Your Weekly Page from Week 1</li>
+      <li>Text messages or emails you've written (copy a few longer ones)</li>
+      <li>Social media posts or comments</li>
+      <li>Papers or assignments from other classes</li>
+      <li>Journal entries, blog posts, or any personal writing</li>
+      <li>Work emails or professional writing</li>
+    </ul>
+    <p>A mix of different types works best — it helps Claude see how your voice stays consistent or changes across situations.</p>
+
+    <div class="response-area">
+      <label for="r1">What writing samples did you gather?</label>
+      <span class="helper-text" id="r1-help">List what you're using. You don't need to paste the writing itself here.</span>
+      <textarea id="r1" aria-describedby="r1-help" placeholder='e.g., "My Week 1 Weekly Page, three text messages to my best friend, and an email to my boss"'></textarea>
+    </div>
+
+    <nav class="step-nav" aria-label="Step navigation">
+      <div></div>
+      <button class="btn btn-primary" onclick="goToStep(2)" aria-label="Continue to step 2, Sentence Structure">Next &#8594;</button>
+    </nav>
+  </section>
+
+  <!-- STEP 2 -->
+  <section class="step" id="step2" role="region" aria-label="Step 2: Sentence Structure" tabindex="-1">
+    <span class="step-label" aria-hidden="true">Step 2 of 7</span>
+    <h2>Round 1: How You Build Sentences</h2>
+    <p>Go to Claude and paste the prompt below. After the prompt, paste <strong>all</strong> of your writing samples.</p>
+
+    <div class="prompt-block" role="region" aria-label="Prompt to copy into Claude">
+      <div class="prompt-block-label" id="p1-label">Copy this prompt into Claude</div>
+      <button class="copy-btn" onclick="copyPrompt(this, 'prompt1')" aria-label="Copy sentence structure prompt to clipboard">Copy</button>
+      <div class="prompt-text" id="prompt1" aria-labelledby="p1-label">I'm a college student learning about my own writing style. Below are several samples of my actual writing from different contexts. Please analyze ONLY my sentence structure patterns. Specifically:
+
+- How long are my sentences on average? Do I tend toward short, punchy sentences or longer, complex ones?
+- Do I vary my sentence length, or do they tend to be similar?
+- How do I typically start my sentences? (With "I"? With dependent clauses? With questions?)
+- Do I use a lot of connecting words (and, but, so, because)?
+- Any other structural patterns you notice?
+
+Please be specific and use examples from my writing to show me what you mean. Be honest — I want to learn, not just hear nice things.
+
+Here is my writing:
+
+[PASTE YOUR WRITING SAMPLES HERE]</div>
+    </div>
+
+    <p>After Claude responds, come back and save what it told you:</p>
+
+    <div class="response-area">
+      <label for="r2">Claude's analysis of your sentence structure</label>
+      <span class="helper-text" id="r2-help">Paste Claude's full response, or summarize the key points.</span>
+      <textarea id="r2" aria-describedby="r2-help" placeholder="Paste Claude's response here, or summarize the key points..."></textarea>
+    </div>
+
+    <nav class="step-nav" aria-label="Step navigation">
+      <button class="btn btn-secondary" onclick="goToStep(1)" aria-label="Go back to step 1">&#8592; Back</button>
+      <button class="btn btn-primary" onclick="goToStep(3)" aria-label="Continue to step 3, Voice and Tone">Next &#8594;</button>
+    </nav>
+  </section>
+
+  <!-- STEP 3 -->
+  <section class="step" id="step3" role="region" aria-label="Step 3: Voice and Tone" tabindex="-1">
+    <span class="step-label" aria-hidden="true">Step 3 of 7</span>
+    <h2>Round 2: Your Voice</h2>
+    <p>Go back to the <strong>same</strong> Claude conversation — don't start a new one. Claude remembers your writing from Round 1. Paste this next prompt:</p>
+
+    <div class="prompt-block" role="region" aria-label="Prompt to copy into Claude">
+      <div class="prompt-block-label" id="p2-label">Copy this prompt into Claude</div>
+      <button class="copy-btn" onclick="copyPrompt(this, 'prompt2')" aria-label="Copy voice and tone prompt to clipboard">Copy</button>
+      <div class="prompt-text" id="prompt2" aria-labelledby="p2-label">Now analyze my writing voice and tone. Based on the same writing samples:
+
+- How would you describe my overall voice? (Formal? Casual? Somewhere in between?)
+- Does my voice change between the different samples? How?
+- Do I sound confident, tentative, conversational, academic, or something else?
+- Is there a personality that comes through in my writing? What kind of person would a reader imagine wrote this?
+- What makes my voice different from generic or AI-generated writing?
+
+Again, be specific and use examples from my writing.</div>
+    </div>
+
+    <div class="response-area">
+      <label for="r3">Claude's analysis of your voice and tone</label>
+      <span class="helper-text" id="r3-help">Paste Claude's response or summarize the key points about your writing voice.</span>
+      <textarea id="r3" aria-describedby="r3-help" placeholder="Paste Claude's response here, or summarize the key points..."></textarea>
+    </div>
+
+    <nav class="step-nav" aria-label="Step navigation">
+      <button class="btn btn-secondary" onclick="goToStep(2)" aria-label="Go back to step 2">&#8592; Back</button>
+      <button class="btn btn-primary" onclick="goToStep(4)" aria-label="Continue to step 4, Word Choice">Next &#8594;</button>
+    </nav>
+  </section>
+
+  <!-- STEP 4 -->
+  <section class="step" id="step4" role="region" aria-label="Step 4: Word Choice and Habits" tabindex="-1">
+    <span class="step-label" aria-hidden="true">Step 4 of 7</span>
+    <h2>Round 3: Your Word Choices &amp; Habits</h2>
+    <p>One more round. Same Claude conversation:</p>
+
+    <div class="prompt-block" role="region" aria-label="Prompt to copy into Claude">
+      <div class="prompt-block-label" id="p3-label">Copy this prompt into Claude</div>
+      <button class="copy-btn" onclick="copyPrompt(this, 'prompt3')" aria-label="Copy word choice prompt to clipboard">Copy</button>
+      <div class="prompt-text" id="prompt3" aria-labelledby="p3-label">Finally, analyze my word choice and recurring habits. Based on my writing samples:
+
+- Are there words or phrases I use a lot? (Even small ones like "just," "really," "I think," "honestly")
+- Do I use simple, everyday vocabulary or more formal/academic language?
+- Do I use figurative language (metaphors, comparisons, exaggeration)?
+- What techniques or moves does my writing make repeatedly? (For example: asking questions, giving examples, using humor, hedging my claims, acknowledging other perspectives)
+- What are my biggest strengths as a writer based on what you see here?
+- If you had to describe my writing to someone who'd never read it, what would you say?
+
+Be specific. Use examples.</div>
+    </div>
+
+    <div class="response-area">
+      <label for="r4">Claude's analysis of your word choice and habits</label>
+      <span class="helper-text" id="r4-help">Paste Claude's response or summarize the key points.</span>
+      <textarea id="r4" aria-describedby="r4-help" placeholder="Paste Claude's response here, or summarize the key points..."></textarea>
+    </div>
+
+    <nav class="step-nav" aria-label="Step navigation">
+      <button class="btn btn-secondary" onclick="goToStep(3)" aria-label="Go back to step 3">&#8592; Back</button>
+      <button class="btn btn-primary" onclick="goToStep(5)" aria-label="Continue to step 5, Reflection">Next &#8594;</button>
+    </nav>
+  </section>
+
+  <!-- STEP 5 -->
+  <section class="step" id="step5" role="region" aria-label="Step 5: Reflection" tabindex="-1">
+    <span class="step-label" aria-hidden="true">Step 5 of 7</span>
+    <h2>The Moment of Truth</h2>
+    <p>You've now seen your writing analyzed from three different angles. Take a breath.</p>
+    <p>An AI just told you things about your own writing that you may never have noticed. Some of it probably felt accurate. Some of it might have felt off.</p>
+
+    <div class="callout" role="note">
+      <strong>Both reactions matter.</strong> Claude can identify patterns in text. But it doesn't know you. It doesn't know why you write the way you do, what experiences shaped your voice, or what you're trying to say underneath the words. That's the difference between analysis and understanding.
+    </div>
+
+    <div class="response-area">
+      <label for="r5a">What's one thing Claude identified that surprised you or that you'd never noticed about your own writing?</label>
+      <textarea id="r5a" placeholder="What caught you off guard?"></textarea>
+    </div>
+
+    <div class="response-area">
+      <label for="r5b">Did Claude get anything wrong? Was there anything that didn't feel accurate to who you are as a writer?</label>
+      <textarea id="r5b" placeholder="Where did Claude miss the mark — or miss the point?"></textarea>
+    </div>
+
+    <nav class="step-nav" aria-label="Step navigation">
+      <button class="btn btn-secondary" onclick="goToStep(4)" aria-label="Go back to step 4">&#8592; Back</button>
+      <button class="btn btn-primary" onclick="goToStep(6)" aria-label="Continue to step 6, Follow-up Question">Next &#8594;</button>
+    </nav>
+  </section>
+
+  <!-- STEP 6 -->
+  <section class="step" id="step6" role="region" aria-label="Step 6: Your Follow-Up Question" tabindex="-1">
+    <span class="step-label" aria-hidden="true">Step 6 of 7</span>
+    <h2>Your Turn to Ask</h2>
+    <p>Now it's your turn to drive. Go back to your Claude conversation and ask a follow-up question about your writing — anything you're curious about.</p>
+    <p>Here are some ideas, but ask whatever interests you:</p>
+
+    <div class="example-questions" role="list" aria-label="Example follow-up questions">
+      <div class="example-q" role="listitem">"Why do I start so many sentences with 'I'? Is that a problem?"</div>
+      <div class="example-q" role="listitem">"You said my voice is conversational — what would it look like if I tried to write more formally?"</div>
+      <div class="example-q" role="listitem">"Can you show me what my writing would sound like if someone else wrote the same ideas?"</div>
+      <div class="example-q" role="listitem">"What's one thing I could work on to become a stronger writer?"</div>
+    </div>
+
+    <div class="response-area">
+      <label for="r6">What did you ask Claude, and what did it tell you?</label>
+      <span class="helper-text" id="r6-help">Paste your question and Claude's response, or summarize what you learned.</span>
+      <textarea id="r6" aria-describedby="r6-help" placeholder="Paste your question and Claude's response, or summarize..."></textarea>
+    </div>
+
+    <div class="response-area">
+      <label for="r6b">Was the answer useful? Why or why not?</label>
+      <textarea id="r6b" placeholder="A sentence or two is fine." style="min-height: 80px;"></textarea>
+    </div>
+
+    <nav class="step-nav" aria-label="Step navigation">
+      <button class="btn btn-secondary" onclick="goToStep(5)" aria-label="Go back to step 5">&#8592; Back</button>
+      <button class="btn btn-primary" onclick="goToStep(7)" aria-label="Continue to step 7, Wrap Up">Next &#8594;</button>
+    </nav>
+  </section>
+
+  <!-- STEP 7 -->
+  <section class="step" id="step7" role="region" aria-label="Step 7: Wrap Up" tabindex="-1">
+    <span class="step-label" aria-hidden="true">Step 7 of 7</span>
+    <h2>What You Just Did</h2>
+    <p>You used AI to learn something about yourself as a writer — which is very different from using AI to write for you.</p>
+    <p>AI helped you <strong>see</strong> your writing more clearly. But the writing — and the meaning you make from it — is yours.</p>
+
+    <div class="callout" role="note">
+      <strong>Next step:</strong> Your Weekly Page this week is a reflection on this experience. The prompt is in the Weekly Page assignment — use what you discovered here as your starting point.
+    </div>
+
+    <div class="response-area">
+      <label for="r7">In one sentence, what's the most important thing you learned about yourself as a writer today?</label>
+      <textarea id="r7" placeholder="One sentence..." style="min-height: 80px;"></textarea>
+    </div>
+
+    <div class="export-section">
+      <div class="checkmark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" focusable="false"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <h2 style="font-size: 1.3rem; margin-bottom: 0.5rem;">Nice work.</h2>
+      <p>Save your results so you can reference them for your Weekly Page.</p>
+      <button class="btn btn-export" onclick="exportPDF()" aria-label="Download all your responses as a PDF file">Download My Results as PDF</button>
+    </div>
+
+    <nav class="step-nav" aria-label="Step navigation">
+      <button class="btn btn-secondary" onclick="goToStep(6)" aria-label="Go back to step 6">&#8592; Back</button>
+      <div></div>
+    </nav>
+  </section>
+
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script>
+  const totalSteps = 7;
+  let currentStep = 1;
+  const allIds = ['r1','r2','r3','r4','r5a','r5b','r6','r6b','r7'];
+
+  function announce(msg) {
+    const r = document.getElementById('liveRegion');
+    r.textContent = '';
+    setTimeout(() => { r.textContent = msg; }, 100);
+  }
+
+  function saveResponses() {
+    try {
+      allIds.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) sessionStorage.setItem('wsa_' + id, el.value);
+      });
+    } catch(e) {}
+  }
+
+  function loadResponses() {
+    try {
+      allIds.forEach(id => {
+        const el = document.getElementById(id);
+        const v = sessionStorage.getItem('wsa_' + id);
+        if (el && v) el.value = v;
+      });
+    } catch(e) {}
+  }
+
+  document.querySelectorAll('textarea').forEach(ta => {
+    ta.addEventListener('input', saveResponses);
+  });
+
+  function goToStep(n) {
+    saveResponses();
+    document.getElementById('step' + currentStep).classList.remove('active');
+    currentStep = n;
+    const newEl = document.getElementById('step' + currentStep);
+    newEl.classList.add('active');
+
+    const pct = Math.round((currentStep / totalSteps) * 100);
+    const fill = document.getElementById('progressFill');
+    fill.style.width = pct + '%';
+    fill.parentElement.setAttribute('aria-valuenow', pct);
+    document.getElementById('progressLabel').textContent = 'Step ' + currentStep + ' of ' + totalSteps;
+    document.getElementById('progressPercent').textContent = pct + '%';
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setTimeout(() => { newEl.focus(); }, 300);
+
+    const h = newEl.querySelector('h2');
+    announce('Step ' + currentStep + ' of ' + totalSteps + ': ' + (h ? h.textContent : ''));
+  }
+
+  function copyPrompt(btn, id) {
+    const text = document.getElementById(id).textContent;
+    navigator.clipboard.writeText(text).then(() => {
+      btn.textContent = 'Copied!';
+      btn.classList.add('copied');
+      announce('Prompt copied to clipboard');
+      setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+    }).catch(() => {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand('copy');
+        btn.textContent = 'Copied!';
+        btn.classList.add('copied');
+        announce('Prompt copied to clipboard');
+        setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+      } catch(e) {
+        btn.textContent = 'Failed';
+        announce('Could not copy. Please select the text manually.');
+        setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
+      }
+      document.body.removeChild(ta);
+    });
+  }
+
+  function exportPDF() {
+    saveResponses();
+    announce('Generating PDF. This may take a moment.');
+
+    const c = document.createElement('div');
+    c.style.cssText = "font-family:'DM Sans',sans-serif;padding:20px;max-width:700px;color:#1A2E1F;line-height:1.6";
+
+    const t = document.createElement('h1');
+    t.textContent = 'My Writing Style Analysis';
+    t.style.cssText = "font-family:'Source Serif 4',serif;color:#2E6B3E;font-size:24px;margin-bottom:4px";
+    c.appendChild(t);
+
+    const s = document.createElement('p');
+    s.textContent = 'ENG101 \u00B7 Salem Community College';
+    s.style.cssText = "color:#536B59;font-size:14px;margin-bottom:24px";
+    c.appendChild(s);
+
+    const sections = [
+      { label: 'Writing Samples Used', ids: ['r1'] },
+      { label: 'Sentence Structure Analysis', ids: ['r2'] },
+      { label: 'Voice & Tone Analysis', ids: ['r3'] },
+      { label: 'Word Choice & Habits Analysis', ids: ['r4'] },
+      { label: 'What Surprised Me', ids: ['r5a'] },
+      { label: 'What Claude Got Wrong', ids: ['r5b'] },
+      { label: 'My Follow-Up Question & Answer', ids: ['r6'] },
+      { label: 'Was It Useful?', ids: ['r6b'] },
+      { label: 'Most Important Thing I Learned', ids: ['r7'] },
+    ];
+
+    sections.forEach(sec => {
+      const h = document.createElement('h3');
+      h.textContent = sec.label;
+      h.style.cssText = "font-family:'Source Serif 4',serif;color:#2E6B3E;font-size:16px;margin-top:20px;margin-bottom:6px;border-bottom:1px solid #C8D9CD;padding-bottom:4px";
+      c.appendChild(h);
+
+      sec.ids.forEach(id => {
+        const el = document.getElementById(id);
+        const p = document.createElement('p');
+        p.textContent = el && el.value ? el.value : '(No response entered)';
+        p.style.cssText = "font-size:13px;white-space:pre-wrap;color:" + (el && el.value ? '#1A2E1F' : '#536B59');
+        c.appendChild(p);
+      });
+    });
+
+    html2pdf().set({
+      margin: [0.75, 0.75, 0.75, 0.75],
+      filename: 'My-Writing-Style-Analysis.pdf',
+      html2canvas: { scale: 2, useCORS: true },
+      jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
+      pagebreak: { mode: ['avoid-all'] }
+    }).from(c).save().then(() => {
+      announce('PDF downloaded successfully.');
+    });
+  }
+
+  loadResponses();
+</script>
+
+</body>
+</html>
